@@ -58,7 +58,7 @@ class App
      */
     public function printMetaTag()
     {
-        echo '<meta name="rek_viewclick" content=""/>' . "\n";
+        echo '<meta name="rek_viewclick" content="">' . "\n";
     }
 
     /**
