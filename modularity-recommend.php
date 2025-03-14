@@ -25,7 +25,9 @@ define('MODULARITYRECOMMEND_VIEW_PATH', MODULARITYRECOMMEND_PATH . 'views/');
 define('MODULARITYRECOMMEND_MODULE_VIEW_PATH', plugin_dir_path(__FILE__) . 'source/php/Module/views');
 define('MODULARITYRECOMMEND_MODULE_PATH', MODULARITYRECOMMEND_PATH . 'source/php/Module/');
 
-load_plugin_textdomain('modularity-recommend', false, plugin_basename(dirname(__FILE__)) . '/languages');
+add_action('init', function () {
+    load_plugin_textdomain('modularity-recommend', false, plugin_basename(dirname(__FILE__)) . '/languages');
+});
 
 // Autoload from plugin
 if (file_exists(MODULARITYRECOMMEND_PATH . 'vendor/autoload.php')) {
