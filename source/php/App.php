@@ -30,9 +30,36 @@ class App
         add_filter('acf/load_field/key=field_628c958c693a9', array($this, 'hideRekAIOptions'));
     }
 
+    /**
+     * Check if RekAI is enabled
+     * @return bool
+     */
+    private function isRekAiEnabled(): bool
+    {
+        return (bool) get_field('rekai_enable', 'options') ?? false;
+    }
+
+    /**
+     * Get RekAI script url
+     * @return false|string
+     */
+    private function getRekAiScriptUrl(): false|string
+    {
+        $scriptUrl = get_field('rekai_script_url', 'options');
+        if($scriptUrl) {
+            return $scriptUrl;
+        }
+        return false;
+    }
+
+    /**
+     * Hide RekAI field
+     * @param $field
+     * @return mixed
+     */
     public function hideRekAIField($field)
     {
-        if (get_field('rekai_enable', 'options') == false) {
+        if (!$this->isRekAiEnabled()) {
             return false;
         }
         return $field;
@@ -44,7 +71,11 @@ class App
      */
     public function addUndefinedWarning()
     {
-        if (get_field('rekai_enable', 'options') && empty(get_field('rekai_script_url', 'option'))) {
+        if (!$this->isRekAiEnabled()) {
+            return false;
+        }
+
+        if (!$this->getRekAiScriptUrl()) {
             echo '
                 <script>
                     console.log("RekAI script url is not defined. Please fill it out in the settings tab or disable rekai recommendations.");
@@ -58,6 +89,14 @@ class App
      */
     public function printMetaTag()
     {
+        if (!$this->isRekAiEnabled()) {
+            return false;
+        }
+
+        if(!$this->getRekAiScriptUrl()) {
+            return false;
+        }
+
         echo '<meta name="rek_viewclick" content="">' . "\n";
     }
 
@@ -66,17 +105,21 @@ class App
      */
     public function registerRekAIScript()
     {
-        $scriptUrl = get_field('rekai_script_url', 'option');
-
-        if ($scriptUrl) {
-            wp_register_script(
-                'modularity-recommend-stats',
-                $scriptUrl,
-                null,
-                '1.0.0'
-            );
-            wp_enqueue_script('modularity-recommend-stats');
+        if(!$this->isRekAiEnabled()) {
+            return false;
         }
+
+        if(!$this->getRekAiScriptUrl()) {
+            return false;
+        }
+
+        wp_register_script(
+            'modularity-recommend-stats',
+            $this->getRekAiScriptUrl(),
+            null,
+            '1.0.0'
+        );
+        wp_enqueue_script('modularity-recommend-stats');
     }
 
     /**
@@ -101,7 +144,7 @@ class App
      */
     public function hideRekAIOptions($field)
     {
-        if (get_field('rekai_enable', 'options') == false) {
+        if (!$this->isRekAiEnabled()) {
             $field['wrapper']['class'] = 'hidden';
         }
 
