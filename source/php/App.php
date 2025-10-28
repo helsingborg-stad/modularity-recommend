@@ -13,7 +13,7 @@ class App
         new Admin\Settings();
 
         //Register module
-        add_action('plugins_loaded', array($this, 'registerModule'));
+        add_action('init', array($this, 'registerModule'));
 
         //Add global rek ai script
         add_action('wp_enqueue_scripts', array($this, 'registerRekAIScript'));
