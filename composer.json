@@ -29,7 +29,6 @@
             "ModularityRecommend\\": "source/php/"
         }
     },
-    "version": "4.0.1",
     "config": {
         "allow-plugins": {
             "composer/installers": true
