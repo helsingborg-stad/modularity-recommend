@@ -73,7 +73,7 @@ class Recommend extends \Modularity\Module
         $data['enableRekAI'] = get_field('rekai_enable', 'options');
 
         //Add uid
-        $data['recommendUid'] = 'prediction-mount-' . md5(rand());
+        $data['recommendUid'] = 'prediction-mount-' . md5((string) rand());
 
         return $data;
     }
