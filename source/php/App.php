@@ -1,33 +1,32 @@
 <?php
 
-namespace ModularityRecommend;
+declare(strict_types=1);
 
-use ModularityRecommend\Helper\CacheBust;
+namespace ModularityRecommend;
 
 class App
 {
     public function __construct()
     {
-
         //Init subset
         new Admin\Settings();
 
         //Register module
-        add_action('init', array($this, 'registerModule'));
+        add_action('init', [$this, 'registerModule']);
 
         //Add global rek ai script
-        add_action('wp_enqueue_scripts', array($this, 'registerRekAIScript'));
+        add_action('wp_enqueue_scripts', [$this, 'registerRekAIScript']);
 
         //Add warning
-        add_action('admin_head', array($this, 'addUndefinedWarning'));
+        add_action('admin_head', [$this, 'addUndefinedWarning']);
 
         //Head
-        add_action('wp_head', array($this, 'printMetaTag'));
+        add_action('wp_head', [$this, 'printMetaTag']);
 
         //Remove rek ai field, if not enabled
-        add_filter("acf/prepare_field/name=rekai_number_of_recommendation", array($this, 'hideRekAIField'));
+        add_filter('acf/prepare_field/name=rekai_number_of_recommendation', [$this, 'hideRekAIField']);
 
-        add_filter('acf/load_field/key=field_628c958c693a9', array($this, 'hideRekAIOptions'));
+        add_filter('acf/load_field/key=field_628c958c693a9', [$this, 'hideRekAIOptions']);
     }
 
     /**
@@ -46,7 +45,7 @@ class App
     private function getRekAiScriptUrl(): false|string
     {
         $scriptUrl = get_field('rekai_script_url', 'options');
-        if($scriptUrl) {
+        if ($scriptUrl) {
             return $scriptUrl;
         }
         return false;
@@ -93,7 +92,7 @@ class App
             return false;
         }
 
-        if(!$this->getRekAiScriptUrl()) {
+        if (!$this->getRekAiScriptUrl()) {
             return false;
         }
 
@@ -105,11 +104,11 @@ class App
      */
     public function registerRekAIScript()
     {
-        if(!$this->isRekAiEnabled()) {
+        if (!$this->isRekAiEnabled()) {
             return false;
         }
 
-        if(!$this->getRekAiScriptUrl()) {
+        if (!$this->getRekAiScriptUrl()) {
             return false;
         }
 
@@ -117,7 +116,7 @@ class App
             'modularity-recommend-stats',
             $this->getRekAiScriptUrl(),
             null,
-            '1.0.0'
+            '1.0.0',
         );
         wp_enqueue_script('modularity-recommend-stats');
     }
@@ -131,7 +130,7 @@ class App
         if (function_exists('modularity_register_module')) {
             modularity_register_module(
                 MODULARITYRECOMMEND_MODULE_PATH,
-                'Recommend'
+                'Recommend',
             );
         }
     }
