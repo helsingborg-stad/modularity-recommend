@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 @if (!$hideTitle)
     @typography([
         'element' => 'h4',
@@ -17,11 +22,11 @@
             let view = '';
             switch(template) {
               case "card":
-                view = '<?php echo modularity_recommend_render_blade_view("partials.card", ["heading" => "{MOD_RECOMMEND_TITLE}", "content" => "{MOD_RECOMMEND_CONTENT}", "href" => "{MOD_RECOMMEND_HREF}", "gridClass" => $gridClass]); ?>';
+                view = '<?php echo modularity_recommend_render_blade_view('partials.card', ['heading' => '{MOD_RECOMMEND_TITLE}', 'content' => '{MOD_RECOMMEND_CONTENT}', 'href' => '{MOD_RECOMMEND_HREF}', 'gridClass' => $gridClass]); ?>';
                 break;
               case "button":
               default:
-                view = '<?php echo modularity_recommend_render_blade_view("partials.button", ["href"=> "{MOD_RECOMMEND_HREF}", "text" => "{MOD_RECOMMEND_TITLE}", "type" => "dynamic"]); ?> ';
+                view = '<?php echo modularity_recommend_render_blade_view('partials.button', ['href' => '{MOD_RECOMMEND_HREF}', 'text' => '{MOD_RECOMMEND_TITLE}', 'type' => 'dynamic']); ?> ';
             }
 
             view = view.replaceAll("{MOD_RECOMMEND_HREF}", data.url ?? '');

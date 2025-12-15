@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ModularityRecommend\Admin;
 
 /**
@@ -8,8 +10,9 @@ namespace ModularityRecommend\Admin;
  */
 class Settings
 {
-    public function __construct() {
-        add_action('acf/init', array($this, 'registerSettings'));
+    public function __construct()
+    {
+        add_action('acf/init', [$this, 'registerSettings']);
     }
 
     /**
@@ -19,13 +22,13 @@ class Settings
     public function registerSettings()
     {
         if (function_exists('acf_add_options_sub_page')) {
-            acf_add_options_sub_page(array(
-                'page_title'  => _x("RekAI", "ACF", 'modularity-recommend'),
-                'menu_title'  => __("RekAI", "RekAI", 'modularity-recommend'),
-                'menu_slug'   => 'modularity-recommend-settings',
+            acf_add_options_sub_page([
+                'page_title' => _x('RekAI', 'ACF', 'modularity-recommend'),
+                'menu_title' => __('RekAI', 'RekAI', 'modularity-recommend'),
+                'menu_slug' => 'modularity-recommend-settings',
                 'parent_slug' => 'options-general.php',
-                'capability'  => 'manage_options'
-            ));
+                'capability' => 'manage_options',
+            ]);
         }
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace ModularityRecommend\Module;
+declare(strict_types=1);
 
-use ModularityRecommend\Helper\CacheBust;
+namespace ModularityRecommend\Module;
 
 /**
  * Class Recommend
@@ -11,13 +11,13 @@ use ModularityRecommend\Helper\CacheBust;
 class Recommend extends \Modularity\Module
 {
     public $slug = 'recommend';
-    public $supports = array();
+    public $supports = [];
 
     public function init()
     {
-        $this->nameSingular = __("Recommend", 'modularity-recommend');
-        $this->namePlural = __("Recommend", 'modularity-recommend');
-        $this->description = __("Recommend view for links.", 'modularity-recommend');
+        $this->nameSingular = __('Recommend', 'modularity-recommend');
+        $this->namePlural = __('Recommend', 'modularity-recommend');
+        $this->description = __('Recommend view for links.', 'modularity-recommend');
     }
 
     /**
@@ -26,46 +26,44 @@ class Recommend extends \Modularity\Module
      */
     public function data(): array
     {
-        $data = array();
+        $data = [];
 
         //Append field config
         $data = array_merge($data, (array) \Modularity\Helper\FormatObject::camelCase(
-            $this->getFields()
+            $this->getFields(),
         ));
 
-        $data['advancedOptions']    = json_encode(!empty($data['rekai']['advancedOptions']) ? $data['rekai']['advancedOptions'] : "null");
-        $data['rekaiOptions']       = json_encode([
-            'subtree' => !empty($data['rekai']['subtree']) ? $this->convertPostsToString($data['rekai']['subtree']) : "",
-            'excludetree' => !empty($data['rekai']['excludetree']) ? $this->convertPostsToString($data['rekai']['excludetree']) : "",
+        $data['advancedOptions'] = json_encode(!empty($data['rekai']['advancedOptions']) ? $data['rekai']['advancedOptions'] : 'null');
+        $data['rekaiOptions'] = json_encode([
+            'subtree' => !empty($data['rekai']['subtree']) ? $this->convertPostsToString($data['rekai']['subtree']) : '',
+            'excludetree' => !empty($data['rekai']['excludetree']) ? $this->convertPostsToString($data['rekai']['excludetree']) : '',
             'userootpath' => !empty($data['rekai']['userootpath']) ? true : false,
-            'rootpathlevel' => !empty($data['rekai']['rootpathlevel']) ? (int)$data['rekai']['rootpathlevel'] : null
+            'rootpathlevel' => !empty($data['rekai']['rootpathlevel']) ? (int) $data['rekai']['rootpathlevel'] : null,
         ]);
 
-        if(isset($data['recommendColumns']) && is_numeric($data['recommendColumns'])) {
-            $data['gridClass'] =  $this->getGridClass((int) $data['recommendColumns']);
+        if (isset($data['recommendColumns']) && is_numeric($data['recommendColumns'])) {
+            $data['gridClass'] = $this->getGridClass((int) $data['recommendColumns']);
         } else {
-            $data['gridClass'] = "";
+            $data['gridClass'] = '';
         }
 
         //Translations
-        $data['lang'] = (object) array(
+        $data['lang'] = (object) [
             'noData' => __(
-                "No static links provided to recommendation module. AI suggestion is off.",
-                'modularity-recommend'
+                'No static links provided to recommendation module. AI suggestion is off.',
+                'modularity-recommend',
             ),
             'loading' => __(
-                "Loading content",
-                'modularity-recommend'
+                'Loading content',
+                'modularity-recommend',
             ),
-        );
+        ];
 
         //Get permalink, reformat to object
         if (!empty($data['recommendLinkList'])) {
-            $data['recommendLinkList'] = array_map(function ($item) {
+            $data['recommendLinkList'] = array_map(static function ($item) {
                 $item['recommendIsExternal'] = $item['recommendLinkIsExternal'];
-                $item['recommendTarget'] = $item['recommendIsExternal']
-                    ? $item['recommendLinkTargetExternal']
-                    : get_permalink($item['recommendLinkTarget']);
+                $item['recommendTarget'] = $item['recommendIsExternal'] ? $item['recommendLinkTargetExternal'] : get_permalink($item['recommendLinkTarget']);
                 $item['recommendExcerpt'] = get_the_excerpt($item['recommendLinkTarget']);
                 return (object) $item;
             }, $data['recommendLinkList']);
@@ -75,7 +73,7 @@ class Recommend extends \Modularity\Module
         $data['enableRekAI'] = get_field('rekai_enable', 'options');
 
         //Add uid
-        $data['recommendUid'] = "prediction-mount-" . md5(rand());
+        $data['recommendUid'] = 'prediction-mount-' . md5(rand());
 
         return $data;
     }
@@ -125,9 +123,9 @@ class Recommend extends \Modularity\Module
         }
 
         if (is_string($mediaQuery)) {
-            $result = "o-grid-" . round($baseColumns / $numberOfColumns) . "@" . $mediaQuery;
+            $result = 'o-grid-' . round($baseColumns / $numberOfColumns) . '@' . $mediaQuery;
         } else {
-            $result = "o-grid-" . round($baseColumns / $numberOfColumns);
+            $result = 'o-grid-' . round($baseColumns / $numberOfColumns);
         }
 
         return $result;
@@ -140,11 +138,11 @@ class Recommend extends \Modularity\Module
      */
     public function convertPostsToString(array $posts)
     {
-        $string = "";
+        $string = '';
         foreach ($posts as $post) {
-            $string .= $post->post_name . ",";
+            $string .= $post->post_name . ',';
         }
-        return rtrim($string, ",");
+        return rtrim($string, ',');
     }
 
     /**
@@ -153,7 +151,7 @@ class Recommend extends \Modularity\Module
      */
     public function template(): string
     {
-        return "recommend.blade.php";
+        return 'recommend.blade.php';
     }
 
     /**
@@ -162,16 +160,7 @@ class Recommend extends \Modularity\Module
      */
     public function style()
     {
-        //Register custom css
-        wp_register_style(
-            'modularity-recommend',
-            MODULARITYRECOMMEND_URL . '/dist/' . CacheBust::name('css/modularity-recommend.css'),
-            null,
-            '1.0.0'
-        );
-
-        //Enqueue
-        wp_enqueue_style('modularity-recommend');
+        $this->wpEnqueue?->add('css/modularity-recommend.css', [], '1.0.0');
     }
 
     /**
