@@ -6,6 +6,9 @@
                     "href"     => $recommendLink->recommendTarget,
                     "type"     => "static",
                     "external" => $recommendLink->recommendIsExternal,
+                    "icon"     => $recommendLink->recommendIcon ?? false,
+                    "style"    => $recommendLink->recommendStyle ?? 'outlined',
+                    "color"    => $recommendLink->recommendColor ?? 'primary',
                 ])
             @endforeach
       @endif
