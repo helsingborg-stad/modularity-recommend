@@ -192,7 +192,7 @@
                 5 => array(
                     'key' => 'field_696e496bfea18',
                     'label' => __('Style', 'modularity-recommend'),
-                    'name' => 'style',
+                    'name' => 'recommend_link_style',
                     'aria-label' => '',
                     'type' => 'select',
                     'instructions' => '',
@@ -232,7 +232,7 @@
                 6 => array(
                     'key' => 'field_696e49b2fea19',
                     'label' => __('Color', 'modularity-recommend'),
-                    'name' => 'color',
+                    'name' => 'recommend_link_color',
                     'aria-label' => '',
                     'type' => 'select',
                     'instructions' => '',
@@ -299,7 +299,7 @@
         3 => array(
             'key' => 'field_696f8c415f804',
             'label' => __('Icon position', 'modularity-recommend'),
-            'name' => 'icon_position',
+            'name' => 'recommend_link_icon_position',
             'aria-label' => '',
             'type' => 'radio',
             'instructions' => '',

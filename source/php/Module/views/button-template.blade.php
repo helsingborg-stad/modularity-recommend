@@ -9,6 +9,7 @@
                     "icon"     => $recommendLink->recommendIcon ?? false,
                     "style"    => $recommendLink->recommendStyle ?? 'outlined',
                     "color"    => $recommendLink->recommendColor ?? 'primary',
+                    "iconPosition" => $iconPosition ?? 'after',
                 ])
             @endforeach
       @endif

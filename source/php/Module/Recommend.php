@@ -67,11 +67,13 @@ class Recommend extends \Modularity\Module
                 $item['recommendExcerpt'] = get_the_excerpt($item['recommendLinkTarget']);
                 // Add icon, style, and color if they exist
                 $item['recommendIcon'] = $item['recommendLinkIcon'] ?? false;
-                $item['recommendStyle'] = !empty($item['style']) ? $item['style'] : 'outlined';
-                $item['recommendColor'] = !empty($item['color']) ? $item['color'] : 'primary';
+                $item['recommendStyle'] = !empty($item['recommendLinkStyle']) ? $item['recommendLinkStyle'] : 'outlined';
+                $item['recommendColor'] = !empty($item['recommendLinkColor']) ? $item['recommendLinkColor'] : 'primary';
                 return (object) $item;
             }, $data['recommendLinkList']);
         }
+
+        $data['iconPosition'] = $data['recommendLinkIconPosition'] ?? 'after';
 
         //Enable RekAI
         $data['enableRekAI'] = get_field('rekai_enable', 'options');

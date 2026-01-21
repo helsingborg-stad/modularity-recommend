@@ -188,7 +188,7 @@
                 {
                     "key": "field_696e496bfea18",
                     "label": "Style",
-                    "name": "style",
+                    "name": "recommend_link_style",
                     "aria-label": "",
                     "type": "select",
                     "instructions": "",
@@ -228,7 +228,7 @@
                 {
                     "key": "field_696e49b2fea19",
                     "label": "Color",
-                    "name": "color",
+                    "name": "recommend_link_color",
                     "aria-label": "",
                     "type": "select",
                     "instructions": "",
@@ -295,7 +295,7 @@
         {
             "key": "field_696f8c415f804",
             "label": "Icon position",
-            "name": "icon_position",
+            "name": "recommend_link_icon_position",
             "aria-label": "",
             "type": "radio",
             "instructions": "",

@@ -6,6 +6,7 @@
 'href' => $href,
 'size' => 'sm',
 'context' => ['module.recommend', 'module.recommend.button'],
+'reversePositions' => $iconPosition == 'before' ? true : false,
 'classList' => [
 'recommend-linklist__item',
 'recommend-linklist__' . $type . '-item',
