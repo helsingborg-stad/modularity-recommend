@@ -1,7 +1,8 @@
 @button([
     'text' => $text,
-    'style' => 'outlined',
-    'color' => 'primary',
+    'style' => $style ?? 'outlined',
+    'color' => $color ?? 'primary',
+    'icon' => $icon ?? false,
     'href' => $href,
     'size' => 'sm',
     'context' => ['module.recommend', 'module.recommend.button'],
@@ -10,5 +11,6 @@
         'recommend-linklist__' . $type . '-item',
         'c-button--pill',
     ],
+    'reversePositions' => $iconPosition == 'before' ? true : false,
 ])
 @endbutton
