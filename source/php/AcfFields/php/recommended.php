@@ -1,7 +1,9 @@
 <?php 
 
-if (function_exists('acf_add_local_field_group')) {
-    acf_add_local_field_group(array(
+
+if (function_exists('acf_add_local_field_group')) {
+
+    acf_add_local_field_group(array(
     'key' => 'group_61ea7a87e8e9f',
     'title' => __('Recommendations', 'modularity-recommend'),
     'fields' => array(
@@ -56,7 +58,7 @@
                     'required' => 1,
                     'conditional_logic' => 0,
                     'wrapper' => array(
-                        'width' => '50',
+                        'width' => '40',
                         'class' => '',
                         'id' => '',
                     ),
@@ -163,6 +165,40 @@
                     'parent_repeater' => 'field_61ea7ae22b203',
                 ),
                 4 => array(
+                    'key' => 'field_69eb62c521b2b4',
+                    'label' => __('Open in new tab', 'modularity-recommend'),
+                    'name' => 'recommend_link_open_in_new_tab',
+                    'aria-label' => '',
+                    'type' => 'true_false',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => array(
+                        0 => array(
+                            0 => array(
+                                'field' => 'field_628b9314f8dee',
+                                'operator' => '==',
+                                'value' => 'button',
+                            ),
+                            1 => array(
+                                'field' => 'field_673b050aa3c4c',
+                                'operator' => '==',
+                                'value' => '1',
+                            ),
+                        ),
+                    ),
+                    'wrapper' => array(
+                        'width' => '10',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => __('Yes', 'modularity-recommend'),
+                    'default_value' => 0,
+                    'ui' => 0,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                    'parent_repeater' => 'field_61ea7ae22b203',
+                ),
+                5 => array(
                     'key' => 'field_696e48c055752',
                     'label' => __('Button Icon', 'modularity-recommend'),
                     'name' => 'recommend_link_icon',
@@ -189,7 +225,7 @@
                     'placeholder' => '',
                     'parent_repeater' => 'field_61ea7ae22b203',
                 ),
-                5 => array(
+                6 => array(
                     'key' => 'field_696e496bfea18',
                     'label' => __('Style', 'modularity-recommend'),
                     'name' => 'recommend_link_style',
@@ -229,7 +265,7 @@
                     'search_placeholder' => '',
                     'parent_repeater' => 'field_61ea7ae22b203',
                 ),
-                6 => array(
+                7 => array(
                     'key' => 'field_696e49b2fea19',
                     'label' => __('Color', 'modularity-recommend'),
                     'name' => 'recommend_link_color',
@@ -291,7 +327,7 @@
             ),
             'allow_null' => 0,
             'other_choice' => 0,
-            'default_value' => 'button',
+            'default_value' => __('button', 'modularity-recommend'),
             'layout' => 'horizontal',
             'return_format' => 'value',
             'save_other_choice' => 0,
@@ -578,4 +614,5 @@
     'acfe_meta' => '',
     'acfe_note' => '',
 ));
-}
+
+}

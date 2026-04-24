@@ -53,7 +53,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
@@ -143,6 +143,40 @@
                                 "field": "field_628b9314f8dee",
                                 "operator": "==",
                                 "value": "button"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "Yes",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "parent_repeater": "field_61ea7ae22b203"
+                },
+                {
+                    "key": "field_69eb62c521b2b4",
+                    "label": "Open in new tab",
+                    "name": "recommend_link_open_in_new_tab",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_628b9314f8dee",
+                                "operator": "==",
+                                "value": "button"
+                            },
+                            {
+                                "field": "field_673b050aa3c4c",
+                                "operator": "==",
+                                "value": "1"
                             }
                         ]
                     ],

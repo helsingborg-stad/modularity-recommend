@@ -4,6 +4,7 @@
     'color' => $color ?? 'primary',
     'icon' => $icon ?? false,
     'href' => $href,
+    'target' => $target ?? '_self',
     'size' => 'sm',
     'context' => ['module.recommend', 'module.recommend.button'],
     'classList' => [
