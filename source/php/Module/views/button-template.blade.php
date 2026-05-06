@@ -6,6 +6,7 @@
                     "href"     => $recommendLink->recommendTarget,
                     "type"     => "static",
                     "external" => $recommendLink->recommendIsExternal,
+                    "target"   => ($recommendLink->recommendOpenInNewTab ?? false) ? '_blank' : '_self',
                     "icon"     => $recommendLink->recommendIcon ?? false,
                     "style"    => $recommendLink->recommendStyle ?? 'outlined',
                     "color"    => $recommendLink->recommendColor ?? 'primary',

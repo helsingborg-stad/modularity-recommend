@@ -64,6 +64,7 @@ class Recommend extends \Modularity\Module
             $data['recommendLinkList'] = array_map(static function ($item) {
                 $item['recommendIsExternal'] = $item['recommendLinkIsExternal'];
                 $item['recommendTarget'] = $item['recommendIsExternal'] ? $item['recommendLinkTargetExternal'] : get_permalink($item['recommendLinkTarget']);
+                $item['recommendOpenInNewTab'] = $item['recommendIsExternal'] && !empty($item['recommendLinkOpenInNewTab']);
                 $item['recommendExcerpt'] = get_the_excerpt($item['recommendLinkTarget']);
                 // Add icon, style, and color if they exist
                 $item['recommendIcon'] = $item['recommendLinkIcon'] ?? false;
