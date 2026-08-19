@@ -57,13 +57,13 @@ declare(strict_types=1);
                 }
             }
 
-          var advancedOptions = {}
-          var rekaiOptions = {}
+          var advancedOptions = {};
+          var rekaiOptions = {};
           try {
-            advancedOptions = JSON.parse({!! $advancedOptions !!})
-            rekaiOptions = JSON.parse(JSON.stringify({!! $rekaiOptions !!}))
+            advancedOptions = JSON.parse({!! $advancedOptions !!});
+            rekaiOptions = JSON.parse(JSON.stringify({!! $rekaiOptions !!}));
           } catch (error) {
-            console.error(error)
+            console.error(error);
           }
 
           var options = {
@@ -73,7 +73,7 @@ declare(strict_types=1);
               ...rekaiOptions,
               ...advancedOptions
             },
-          }
+          };
 
           window.__rekai.predict(options, renderHtml);
           window.__rekai.checkAndAddEventsToDOM('.modularity-mod-recommend');
